@@ -1,20 +1,14 @@
 name: CI
 
-on: [push]
-
-jobs:
+on: 
+    push:
+jobs: 
   build-test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
-      - name: Instalar dependencias con Composer
-        uses: php-actions/composer@v6
-        with:
-         working_dir: ./ongdonacion 
-        
-
-      - name: PHPUnit Tests
+      - uses: php-actions/composer@v6
+      - name: PHPUnit 
         uses: php-actions/phpunit@master
         with:
           bootstrap: vendor/autoload.php
