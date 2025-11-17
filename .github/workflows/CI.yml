@@ -11,8 +11,9 @@ jobs:
       - name: Instalar dependencias con Composer
         uses: php-actions/composer@v6
         with:
-          php_version: '8.2.4'
-          command: install
+         working_dir: ./ongdonacion # Adjust this path
+         command: install
+        
 
       - name: PHPUnit Tests
         uses: php-actions/phpunit@master
