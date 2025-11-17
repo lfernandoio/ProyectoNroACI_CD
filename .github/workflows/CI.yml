@@ -1,0 +1,16 @@
+name: CI
+on: 
+    push:
+jobs: 
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Accedemos al reposotorio
+      - uses: actions/checkout@v3
+      - name : Php Composer
+      - uses: php-actions/composer@v6
+      - name: PHPUnit 
+        uses: php-actions/phpunit@master
+        with:
+          bootstrap: vendor/autoload.php
+          configuration: phpunit.xml
