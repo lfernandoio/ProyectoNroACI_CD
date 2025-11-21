@@ -1,0 +1,19 @@
+name: CD FTP
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  web-deploy:
+    name: Despliegue FTP
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get latest code
+      uses: actions/checkout@v3          
+    - name: Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server:   us-east-1.sftpcloud.io
+        username: Desarrollo
+        password: nlYy9LDbeUrr58CigV1VHgBy2uavMte0
+        local-dir: ./src/
+        server-dir: ./app_web/src/

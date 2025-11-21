@@ -1,0 +1,29 @@
+name: CI_CD
+on:
+  push:
+    branches: ["main"]
+jobs:
+    CI:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: php-actions/composer@v6
+            - name: PHPUnit 
+              uses: php-actions/phpunit@master
+              with:
+                bootstrap: vendor/autoload.php
+                configuration: phpunit.xml
+    CD:
+        needs: CI
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get latest code
+              uses: actions/checkout@v3          
+            - name: Sync files
+              uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+              with:
+                server:   us-east-1.sftpcloud.io
+                username: Desarrollo
+                password: nlYy9LDbeUrr58CigV1VHgBy2uavMte0
+                local-dir: ./src/
+                server-dir: ./app_web/src/
